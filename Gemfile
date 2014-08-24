@@ -46,4 +46,4 @@ end
 gem 'devise'
 gem 'vuejs-rails'
 gem 'haml-rails'
-
+gem 'bootstrap-sass'
