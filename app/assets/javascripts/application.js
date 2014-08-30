@@ -12,6 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/sortable
 //= require turbolinks
 //= require vue
+//= require_self
 //= require_tree .
+
+this.app = {};

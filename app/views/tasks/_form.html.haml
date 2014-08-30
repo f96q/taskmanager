@@ -1,0 +1,42 @@
+%form.form-horizontal{'v-show' => 'isEdit || isNew'}
+  %span.glyphicon.glyphicon-trash{'v-show' => 'isEdit', 'v-on' => 'click: destroy(this)'}
+
+  .form-group
+    %label.col-sm-2.control-label Type
+    .col-sm-10
+      %select.form-control{'v-model' => 'form.task_type'}
+        %option feature
+        %option release
+
+  .form-group
+    %label.col-sm-2.control-label Point
+    .col-sm-10
+      %select.form-control{'v-model' => 'form.point'}
+        %option 0
+        %option 1
+        %option 2
+        %option 3
+
+  .form-group
+    %label.col-sm-2.control-label Status
+    .col-sm-10
+      %select.form-control{'v-model' => 'form.status'}
+        %option unstarted
+        %option started
+        %option finished
+
+  .form-group
+    %label.col-sm-2.control-label Title
+    .col-sm-10
+      %input.form-control{type: 'text', 'v-model' => 'form.title'}
+
+  .form-group
+    %label.col-sm-2.control-label Description
+    .col-sm-10
+      %textarea.form-control{rows: 5, 'v-model' => 'form.description'}
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      %button.btn.btn-default{type: 'button', 'v-on' => 'click: save(form, this)'}Save
+      %button.btn.btn-default{type: 'button', 'v-show' => 'isNew', 'v-on' => "click: close(form)"}Cancel
+      %button.btn.btn-default{type: 'button', 'v-show' => 'isEdit', 'v-on' => "click: isEdit = false"}Cancel
