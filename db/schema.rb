@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140823082520) do
+ActiveRecord::Schema.define(version: 20140901153219) do
+
+  create_table "tasks", force: true do |t|
+    t.string   "uuid",        limit: 36, null: false
+    t.string   "task_type",              null: false
+    t.string   "status",                 null: false
+    t.integer  "point",                  null: false
+    t.string   "title",                  null: false
+    t.text     "description"
+    t.integer  "position"
+    t.datetime "started_at"
+    t.datetime "finished_at"
+    t.integer  "user_id",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tasks", ["uuid"], name: "index_tasks_on_uuid", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
