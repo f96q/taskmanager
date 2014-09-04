@@ -7,9 +7,14 @@ app.TaskFormView = (el, taskListView) ->
       @isNew = true
     methods:
       save: (form) ->
-        task = $.extend {},form
+        task = $.extend {uuid: uuid.v4()}, form
         taskListView.tasks.push task
         @close form
+        $.ajax
+          type: 'post'
+          url: '/api/tasks'
+          data:
+            task: task
 
       close: (form) ->
         @form =
