@@ -2,6 +2,13 @@ Rails.application.routes.draw do
   devise_for :users
   resources :tasks, only: [:index]
   root 'tasks#index'
+  namespace :api do
+    resources :tasks, only: [:index, :create, :update, :destroy] do
+      member do
+        put 'position'
+      end
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

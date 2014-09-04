@@ -3,6 +3,7 @@ class Task < ActiveRecord::Base
   STATUS_TYPE = ['unstarted', 'started', 'finished']
 
   acts_as_list
+  belongs_to :user
 
   validates :uuid, presence: true, uniqueness: true, length: {is: 36}
   validates :task_type , inclusion: {in: TASK_TYPE}

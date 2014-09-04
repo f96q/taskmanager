@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :task do
+    uuid SecureRandom.uuid
     task_type 'feature'
     status 'unstarted'
     point 0
