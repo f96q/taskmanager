@@ -7,7 +7,7 @@
 
 %ul#task-list.list-group{data: {'project-id' => @project.id}}
   %li.list-group-item{'v-class' => "list-group-item-danger: task_type == 'release' && status != 'finished', list-group-item-success: status == 'finished'", 'v-repeat' => 'tasks'}
-    %i.fa.fa-lg{'v-class' => 'fa-caret-right: !isEdit, fa-caret-down: isEdit', 'v-on' => 'click: edit(form, this)'}
+    %i.fa.fa-lg{'v-class' => 'fa-caret-right: !isEdit, fa-caret-down: isEdit', 'v-on' => 'click: edit(this)'}
     %i.fa.fa-star {{point}}
     %i.fa.fa-comment{'v-on' => "mouseenter: popover = true, mouseleave: popover = false"}
       .popover.bottom{'v-class' => 'static-popover: popover'}

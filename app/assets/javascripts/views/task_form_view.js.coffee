@@ -3,24 +3,33 @@ app = @app
 app.TaskFormView = (el, projectId, taskListView) ->
   new Vue
     el: el
-    created: (value) ->
-      @isNew = true
+    data:
+      isNew: true
+      task_type: 'feature'
+      point: 0
+      status: 'unstarted'
+      title: ''
+      description: ''
     methods:
-      save: (form) ->
-        task = $.extend {uuid: uuid.v4()}, form
+      save: ->
+        task =
+          uuid: uuid.v4()
+          task_type: @task_type
+          point: @point
+          status: @status
+          title: @title
+          description: @description
         taskListView.tasks.push task
-        @close form
+        @close()
         $.ajax
           type: 'post'
           url: '/api/tasks'
           data:
             project_id: projectId
             task: task
-
-      close: (form) ->
-        @form =
-          task_type: 'feature'
-          point: 0
-          status: 'unstarted'
-          title: null
-          description: null
+      close: ->
+        @task_type = 'feature'
+        @point = 0
+        @status = 'unstarted'
+        @title = ''
+        @description = ''

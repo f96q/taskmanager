@@ -1,42 +1,50 @@
-%form.form-horizontal{'v-show' => 'isEdit || isNew'}
+%form.form-horizontal{'v-show' => 'isEdit || isNew', ' v-validate' => true}
   %span.glyphicon.glyphicon-trash{'v-show' => 'isEdit', 'v-on' => 'click: destroy(this)'}
 
   .form-group
-    %label.col-sm-2.control-label Type
+    %label.col-sm-2.control-label
+      %span Type
+      %i.fa.fa-asterisk
     .col-sm-10
-      %select.form-control{'v-model' => 'form.task_type'}
+      %select.form-control{'v-model' => 'task_type | required'}
         %option feature
         %option release
 
   .form-group
-    %label.col-sm-2.control-label Point
+    %label.col-sm-2.control-label
+      %span Point
+      %i.fa.fa-asterisk
     .col-sm-10
-      %select.form-control{'v-model' => 'form.point'}
+      %select.form-control{'v-model' => 'point | required | numeric min:0 max:3'}
         %option 0
         %option 1
         %option 2
         %option 3
 
   .form-group
-    %label.col-sm-2.control-label Status
+    %label.col-sm-2.control-label
+      %span Status
+      %i.fa.fa-asterisk
     .col-sm-10
-      %select.form-control{'v-model' => 'form.status'}
+      %select.form-control{'v-model' => 'status | required'}
         %option unstarted
         %option started
         %option finished
 
   .form-group
-    %label.col-sm-2.control-label Title
+    %label.col-sm-2.control-label
+      %span Title
+      %i.fa.fa-asterisk
     .col-sm-10
-      %input.form-control{type: 'text', 'v-model' => 'form.title'}
+      %input.form-control{type: 'text', 'v-model' => 'title | required'}
 
   .form-group
     %label.col-sm-2.control-label Description
     .col-sm-10
-      %textarea.form-control{rows: 5, 'v-model' => 'form.description'}
+      %textarea.form-control{rows: 5, 'v-model' => 'description'}
 
   .form-group
     .col-sm-offset-2.col-sm-10
-      %button.btn.btn-default{type: 'button', 'v-on' => 'click: save(form, this)'}Save
-      %button.btn.btn-default{type: 'button', 'v-show' => 'isNew', 'v-on' => "click: close(form)"}Cancel
-      %button.btn.btn-default{type: 'button', 'v-show' => 'isEdit', 'v-on' => "click: isEdit = false"}Cancel
+      %button.btn.btn-default{type: 'button', 'v-on' => 'click: save(this)', 'v-attr' => 'disabled: !$valid'}Save
+      %button.btn.btn-default{type: 'button', 'v-on' => 'click: close(this)'}Cancel
+

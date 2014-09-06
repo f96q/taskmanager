@@ -6,6 +6,7 @@ app = @app
 
 $ ->
  return unless $('#task-list')[0]
+ Vue.use @['vue-validator']
  projectId = $('#task-list').data 'project-id'
  taskListView = app.TaskListView '#task-list', projectId
  app.TaskFormView '#task-form', projectId, taskListView

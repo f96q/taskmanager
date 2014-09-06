@@ -51,10 +51,8 @@ app.TaskListView = (el, projectId) ->
       editAttributes: ->
         ['task_type', 'point', 'status', 'title', 'description']
 
-      save: (form, task) ->
+      save: (task) ->
         task.isEdit = false
-        for attr in @editAttributes()
-          task[attr] = form[attr]
         $.ajax
           type: 'put'
           url: "/api/tasks/#{task.uuid}"
@@ -67,7 +65,14 @@ app.TaskListView = (el, projectId) ->
               title: task.title
               description: task.description
 
-      edit: (form, task) ->
+      edit: (task) ->
+        task.form = {}
         for attr in @editAttributes()
-          form[attr] = task[attr]
+          task.form[attr] = task[attr]
         task.isEdit = !task.isEdit
+
+      close: (task) ->
+        task.isEdit = false
+        for attr in @editAttributes()
+          task[attr] = task.form[attr]
+
