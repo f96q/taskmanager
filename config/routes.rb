@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :tasks, only: [:index]
-  root 'tasks#index'
+  resources :projects do
+    resources :tasks, only: [:index]
+  end
+
+  root 'projects#index'
   namespace :api do
     resources :tasks, only: [:index, :create, :update, :destroy] do
       member do

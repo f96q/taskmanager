@@ -1,0 +1,6 @@
+- unless errors.empty?
+  .alert.alert-danger{role: 'alert'}
+    %ul
+    - errors.full_messages.each do |message|
+      %li= message
+
