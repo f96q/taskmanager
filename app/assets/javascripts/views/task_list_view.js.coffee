@@ -11,7 +11,9 @@ app.TaskListView = (el, projectId) ->
         data:
           project_id: projectId
         success: (data) =>
-          @tasks = data
+          $.map data, (task) =>
+            task.passedTime = @calcPassedTime task
+            @tasks.push task
 
       $(@$el).sortable
         start: (e, ui) ->
@@ -37,16 +39,30 @@ app.TaskListView = (el, projectId) ->
             project_id: projectId
 
       updateStatus: (task) ->
-        task.status = switch task.status
-                        when 'unstarted' then 'started'
-                        when 'started'   then 'finished'
+        params = {}
+        switch task.status
+          when 'unstarted'
+            task.status = 'started'
+            task.started_at = new Date().toUTCString()
+            params = {status: task.status, started_at: task.started_at}
+          when 'started'
+            task.status = 'finished'
+            task.finished_at = new Date().toUTCString()
+            task.passedTime = @calcPassedTime task
+            params = {status: task.status, finished_at: task.finished_at}
         $.ajax
           type: 'put'
           url: "/api/tasks/#{task.uuid}"
           data:
             project_id: projectId
-            task:
-              status: task.status
+            task: params
+
+      calcPassedTime: (task) ->
+        return unless task.started_at? and task.finished_at?
+        sec = (new Date(task.finished_at).getTime() - new Date(task.started_at).getTime()) / 1000
+        hour = Math.floor sec / 3600
+        min  = Math.floor (sec - hour * 3600) / 60
+        "#{if hour < 10 then '0' + hour else hour}:#{if min < 10 then '0' + min else min}"
 
       editAttributes: ->
         ['task_type', 'point', 'status', 'title', 'description']

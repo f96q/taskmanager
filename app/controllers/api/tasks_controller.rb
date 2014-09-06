@@ -46,6 +46,6 @@ class Api::TasksController < Api::ApplicationController
   end
 
   def task_params
-    params.require(:task).permit :uuid, :task_type, :status, :point, :title, :description, :position
+    params.require(:task).permit :uuid, :task_type, :status, :point, :title, :description, :position, :started_at, :finished_at
   end
 end
