@@ -2,14 +2,15 @@ require 'rails_helper'
 
 RSpec.describe Api::TasksController, :type => :controller do
   let!(:user) { create :user }
+  let(:project) { create :project, user: user }
 
   describe '#index' do
     render_views
     before { sign_in user }
-    let!(:task) { create :task, user: user }
+    let!(:task) { create :task, project: project }
 
     it 'should get tasks' do
-      get :index, format: [:json]
+      get :index, project_id: project.id, format: [:json]
       tasks = JSON.parse response.body
       task = tasks.first
       expect(task['task_type']).to eq('feature')
@@ -25,18 +26,18 @@ RSpec.describe Api::TasksController, :type => :controller do
 
     it 'should create task' do
       expect {
-        post :create, task: {uuid: SecureRandom.uuid, task_type: 'feature', status: 'unstarted', point: 0, title: 'title1', description: 'description'}
+        post :create, project_id: project.id, task: {uuid: SecureRandom.uuid, task_type: 'feature', status: 'unstarted', point: 0, title: 'title1', description: 'description'}
       }.to change { Task.count }.from(0).to(1)
     end
   end
 
   describe '#update' do
-    let(:task) { create :task, user: user }
+    let(:task) { create :task, project: project }
 
     before { sign_in user }
 
     it 'should update task' do
-      put :update, id: task.uuid, task: {task_type: 'release', status: 'finished', point: 3, title: 'update title', description: 'update description'}
+      put :update, project_id: project.id, id: task.uuid, task: {task_type: 'release', status: 'finished', point: 3, title: 'update title', description: 'update description'}
       task.reload
       expect(task.task_type).to eq('release')
       expect(task.status).to eq('finished')
@@ -47,13 +48,13 @@ RSpec.describe Api::TasksController, :type => :controller do
   end
 
   describe '#destroy' do
-    let!(:task) { create :task, user: user }
+    let!(:task) { create :task, project: project }
 
     before { sign_in user }
 
     it 'should destroy task' do
       expect {
-        delete :destroy, id: task.uuid
+        delete :destroy, project_id: project.id, id: task.uuid
       }.to change { Task.count }.from(1).to(0)
     end
   end

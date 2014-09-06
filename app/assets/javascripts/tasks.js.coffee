@@ -6,5 +6,6 @@ app = @app
 
 $ ->
  return unless $('#task-list')[0]
- taskListView = app.TaskListView '#task-list'
- app.TaskFormView '#task-form', taskListView
+ projectId = $('#task-list').data 'project-id'
+ taskListView = app.TaskListView '#task-list', projectId
+ app.TaskFormView '#task-form', projectId, taskListView

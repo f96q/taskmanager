@@ -1,6 +1,6 @@
 app = @app
 
-app.TaskFormView = (el, taskListView) ->
+app.TaskFormView = (el, projectId, taskListView) ->
   new Vue
     el: el
     created: (value) ->
@@ -14,6 +14,7 @@ app.TaskFormView = (el, taskListView) ->
           type: 'post'
           url: '/api/tasks'
           data:
+            project_id: projectId
             task: task
 
       close: (form) ->

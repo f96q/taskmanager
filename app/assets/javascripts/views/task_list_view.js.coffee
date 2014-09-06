@@ -1,6 +1,6 @@
 app = @app
 
-app.TaskListView = (el) ->
+app.TaskListView = (el, projectId) ->
   new Vue
     el: el
     created: ->
@@ -8,6 +8,8 @@ app.TaskListView = (el) ->
       $.ajax
         type: 'get'
         url: '/api/tasks'
+        data:
+          project_id: projectId
         success: (data) =>
           @tasks = data
 
@@ -21,6 +23,7 @@ app.TaskListView = (el) ->
             type: 'put'
             url: "/api/tasks/#{@tasks[start].uuid}/position"
             data:
+              project_id: projectId
               position: end + 1
           @tasks.splice end, 0, @tasks.splice(start, 1)[0]
 
@@ -30,6 +33,8 @@ app.TaskListView = (el) ->
         $.ajax
           type: 'delete'
           url: "/api/tasks/#{task.uuid}"
+          data:
+            project_id: projectId
 
       updateStatus: (task) ->
         task.status = switch task.status
@@ -39,6 +44,7 @@ app.TaskListView = (el) ->
           type: 'put'
           url: "/api/tasks/#{task.uuid}"
           data:
+            project_id: projectId
             task:
               status: task.status
 
@@ -53,6 +59,7 @@ app.TaskListView = (el) ->
           type: 'put'
           url: "/api/tasks/#{task.uuid}"
           data:
+            project_id: projectId
             task:
               task_type: task.task_type
               point: task.point

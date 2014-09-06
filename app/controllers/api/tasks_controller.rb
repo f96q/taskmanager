@@ -1,12 +1,13 @@
 class Api::TasksController < Api::ApplicationController
+  before_action :set_project
   before_action :set_task, only: [:update, :destroy, :position]
 
   def index
-    @tasks = current_user.tasks.order(position: :asc)
+    @tasks = @project.tasks.order(position: :asc)
   end
 
   def create
-    @task = current_user.tasks.new task_params
+    @task = @project.tasks.new task_params
     if @task.save
       head :ok
     else
@@ -34,8 +35,13 @@ class Api::TasksController < Api::ApplicationController
 
   private
 
+  def set_project
+    @project = current_user.projects.where(id: params[:project_id]).first
+    head :not_found unless @project
+  end
+
   def set_task
-    @task = current_user.tasks.where(uuid: params[:id]).first
+    @task = @project.tasks.where(uuid: params[:id]).first
     head :not_found unless @task
   end
 
