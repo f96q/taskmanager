@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140901153219) do
+ActiveRecord::Schema.define(version: 20140906103825) do
+
+  create_table "projects", force: true do |t|
+    t.string   "title",      null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "projects", ["user_id"], name: "index_projects_on_user_id"
 
   create_table "tasks", force: true do |t|
     t.string   "uuid",        limit: 36, null: false
