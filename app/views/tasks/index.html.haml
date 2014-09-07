@@ -3,6 +3,8 @@
   %li.active= @project.title
 
 #task-form
+  %button.btn.btn-primary.mb10{'v-on' => "click: isNew = !isNew"}
+    %i.fa.fa-plus
   =render 'form'
 
 %ul#task-list.list-group{data: {'project-id' => @project.id}}

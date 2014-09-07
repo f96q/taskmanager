@@ -4,7 +4,6 @@ app.TaskFormView = (el, projectId, taskListView) ->
   new Vue
     el: el
     data:
-      isNew: true
       task_type: 'feature'
       point: 0
       status: 'unstarted'
