@@ -15,5 +15,11 @@
         %span.icon-bar
         %span.icon-bar
         =link_to 'Task Manager', root_path, class: 'navbar-brand'
+      .collapse.navbar-collapse
+        %ul.nav.navbar-nav.navbar-right
+          - if user_signed_in?
+            %li= link_to current_user.email, '#'
+            %li= link_to 'sign out', destroy_user_session_path, method: :delete
+
   .container
     = yield
