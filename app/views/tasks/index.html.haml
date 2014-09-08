@@ -15,8 +15,7 @@
     %i.fa.fa-comment{'v-on' => "mouseenter: popover = true, mouseleave: popover = false"}
       .popover.bottom{'v-class' => 'static-popover: popover'}
         %h3.popover-title {{title}}
-        .popover-content
-          %p {{description}}
+        .popover-content{'v-html' => 'description | indent'}
     %span {{title}}
     %button.btn.pull-right.btn-xs.status-button{'v-show' => "status != 'finished'", 'v-class' => "btn-default: status == 'unstarted', btn-primary: status == 'started'", 'v-on' => 'click: updateStatus(this)'} {{status | status}}
     =render 'form'
