@@ -46,5 +46,5 @@
   .form-group
     .col-sm-offset-2.col-sm-10
       %button.btn.btn-default{type: 'button', 'v-on' => 'click: save(this)', 'v-attr' => 'disabled: !$valid'}Save
-      %button.btn.btn-default{type: 'button', 'v-on' => 'click: close(this)'}Cancel
-
+      %button.btn.btn-default{type: 'button', 'v-on' => 'click: close(this)', 'v-show' => 'isEdit'}Cancel
+      %button.btn.btn-default{type: 'button', 'v-on' => 'click: clear()', 'v-show' => 'isNew'}Clear

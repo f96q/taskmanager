@@ -19,16 +19,19 @@ app.TaskFormView = (el, projectId, taskListView) ->
           title: @title
           description: @description
         taskListView.tasks.push task
-        @close()
+        @clear()
         $.ajax
           type: 'post'
           url: '/api/tasks'
           data:
             project_id: projectId
             task: task
-      close: ->
+      clear: ->
         @task_type = 'feature'
         @point = 0
         @status = 'unstarted'
         @title = ''
         @description = ''
+      close: ->
+        @clear()
+        @isNew = !@isNew

@@ -3,7 +3,7 @@
   %li.active= @project.title
 
 #task-form
-  %button.btn.btn-primary.mb10{'v-on' => "click: isNew = !isNew"}
+  %button.btn.btn-primary.mb10{'v-on' => 'click: close()'}
     %i.fa.fa-plus
   =render 'form'
 
