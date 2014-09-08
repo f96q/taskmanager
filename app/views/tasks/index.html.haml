@@ -12,7 +12,7 @@
     %i.fa.fa-lg{'v-class' => 'fa-caret-right: !isEdit, fa-caret-down: isEdit', 'v-on' => 'click: edit(this)'}
     %i.fa.fa-star {{point}}
     %span {{passedTime}}
-    %i.fa.fa-comment{'v-on' => "mouseenter: popover = true, mouseleave: popover = false"}
+    %i.fa.fa-comment{'v-on' => 'mouseenter: popover = true, mouseleave: popover = false'}
       .popover.bottom{'v-class' => 'static-popover: popover'}
         %h3.popover-title {{title}}
         .popover-content{'v-html' => 'description | indent'}
