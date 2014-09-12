@@ -1,0 +1,2 @@
+class TaskProject < Project
+end
