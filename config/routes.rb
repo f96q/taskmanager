@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     resources :tasks, only: [:index]
   end
 
-  root 'projects#index'
+  resources :task_projects
+
+  root 'task_projects#index'
   namespace :api do
     resources :tasks, only: [:index, :create, :update, :destroy] do
       member do

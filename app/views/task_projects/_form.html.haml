@@ -1,0 +1,16 @@
+= form_for @task_project, html: {class: 'form-horizontal', role: 'form'} do |f|
+  = render 'error', errors: f.object.errors
+  .form-group
+    %label.col-sm-2.control-label{for: 'project_title'} title
+    .col-sm-10
+      = f.text_field :title, class: 'form-control'
+
+  - if f.object.new_record?
+    .form-group
+      %label.col-sm-2.control-label{for: 'project_template_id'} Template
+      .col-sm-10
+        = select_tag :template_project_id, options_from_collection_for_select(@template_projects, :id, :title), include_blank: true, class: 'form-control'
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      %button.btn.btn-default{type: 'submit'} save
