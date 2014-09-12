@@ -1,0 +1,2 @@
+class TemplateProject < Project
+end
