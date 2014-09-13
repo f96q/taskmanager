@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :projects do
-    resources :tasks, only: [:index]
-  end
-
   resources :task_projects
   resources :template_projects
 
