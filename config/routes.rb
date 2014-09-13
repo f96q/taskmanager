@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   end
 
   resources :task_projects
+  resources :template_projects
 
   root 'task_projects#index'
   namespace :api do

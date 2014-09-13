@@ -1,0 +1,22 @@
+- content_for :active, 'template_projects'
+
+%ol.breadcrumb
+  %li= link_to 'template', template_projects_path
+  %li.active= @template_project.title
+
+#task-form
+  %button.btn.btn-primary.mb10{'v-on' => 'click: close()'}
+    %i.fa.fa-plus
+  =render 'task_form'
+
+%ul#task-list.list-group{data: {'project-id' => @template_project.id}}
+  %li.list-group-item{'v-class' => "list-group-item-danger: task_type == 'release' && status != 'finished', list-group-item-success: status == 'finished'", 'v-repeat' => 'tasks'}
+    %i.fa.fa-lg{'v-class' => 'fa-caret-right: !isEdit, fa-caret-down: isEdit', 'v-on' => 'click: edit(this)'}
+    %i.fa.fa-star {{point}}
+    %span {{passedTime}}
+    %i.fa.fa-comment{'v-show' => "description != ''", 'v-on' => 'mouseenter: popover = true, mouseleave: popover = false'}
+      .popover.bottom{'v-class' => 'static-popover: popover'}
+        %h3.popover-title {{title}}
+        .popover-content{'v-html' => 'description | indent'}
+    %span {{title}}
+    =render 'task_form'

@@ -1,0 +1,27 @@
+- content_for :active, 'template_projects'
+
+.page-header
+  %h1 template
+
+.mb10
+  =link_to new_template_project_path, class: 'btn btn-primary' do
+    %i.fa.fa-plus
+
+.panel.panel-default
+  %table.table
+    %thead
+    %tr
+      %th title
+      %th
+    %tbody
+    - @template_projects.each do |template_project|
+      %tr
+        %td= link_to template_project.title, template_project_path(template_project)
+        %td
+          = link_to edit_template_project_path(template_project) do
+            %i.fa.fa-lg.fa-edit
+          = link_to template_project_path(template_project), method: :delete, data: {confirm: 'are you sure?'} do
+            %i.fa.fa-lg.fa-trash
+
+.text-center
+  = paginate @template_projects, theme: 'bootstrap'
