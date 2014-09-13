@@ -18,5 +18,3 @@
 //= require vue
 //= require_self
 //= require_tree .
-
-this.app = {};

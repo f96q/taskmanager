@@ -1,6 +1,4 @@
-app = @app
-
-app.TaskFormView = (el, projectId, taskListView) ->
+createTaskFormView = (el, projectId, taskListView) ->
   new Vue
     el: el
     data:
@@ -35,3 +33,5 @@ app.TaskFormView = (el, projectId, taskListView) ->
       close: ->
         @clear()
         @isNew = !@isNew
+
+module.exports = createTaskFormView

@@ -1,6 +1,4 @@
-app = @app
-
-app.TaskListView = (el, projectId) ->
+createTaskListView = (el, projectId) ->
   new Vue
     el: el
     created: ->
@@ -92,3 +90,4 @@ app.TaskListView = (el, projectId) ->
         for attr in @editAttributes()
           task[attr] = task.form[attr]
 
+module.exports = createTaskListView
