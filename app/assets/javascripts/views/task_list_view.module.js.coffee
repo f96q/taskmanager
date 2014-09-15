@@ -57,10 +57,11 @@ createTaskListView = (el, projectId) ->
 
       calcPassedTime: (task) ->
         return unless task.started_at? and task.finished_at?
-        sec = (new Date(task.finished_at).getTime() - new Date(task.started_at).getTime()) / 1000
-        hour = Math.floor sec / 3600
-        min  = Math.floor (sec - hour * 3600) / 60
-        "#{if hour < 10 then '0' + hour else hour}:#{if min < 10 then '0' + min else min}"
+        time = (new Date(task.finished_at).getTime() - new Date(task.started_at).getTime()) / 1000
+        hour = Math.floor time / 3600
+        min  = Math.floor (time - hour * 3600) / 60
+        sec  = time - 3600 * hour - 60 * min
+        "#{if hour < 10 then '0' + hour else hour}:#{if min < 10 then '0' + min else min}:#{if sec < 10 then '0' + sec else sec}"
 
       editAttributes: ->
         ['task_type', 'point', 'status', 'title', 'description']
