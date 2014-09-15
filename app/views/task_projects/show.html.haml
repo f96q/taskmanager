@@ -19,5 +19,5 @@
         %h3.popover-title {{title}}
         .popover-content{'v-html' => 'description | indent'}
     %span {{title}}
-    %button.btn.pull-right.btn-xs.status-button{'v-show' => "status != 'finished'", 'v-class' => "btn-default: status == 'unstarted', btn-primary: status == 'started'", 'v-on' => 'click: updateStatus(this)'} {{status | status}}
+    %button.btn.pull-right.btn-xs.status-button{'v-show' => "status != 'finished'", 'v-class' => "btn-primary: status == 'unstarted', btn-warning: status == 'started'", 'v-on' => 'click: updateStatus(this)'} {{status | status}}
     =render 'task_form'
