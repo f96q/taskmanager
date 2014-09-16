@@ -46,7 +46,7 @@ end
 gem 'devise'
 gem 'vuejs-rails'
 gem 'haml-rails'
-gem 'sprockets-commonjs', git: 'git://github.com/maccman/sprockets-commonjs.git'
+gem 'sprockets-commonjs'
 gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
 gem 'font-awesome-rails'
