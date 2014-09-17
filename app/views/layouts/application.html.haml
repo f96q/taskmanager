@@ -18,7 +18,7 @@
       .collapse.navbar-collapse
         %ul.nav.navbar-nav
           %li{class: yield(:active) == 'task_projects' ? 'active' : ''}= link_to 'project', task_projects_path
-          %li{class: yield(:active) == 'template_projects' ? 'active' : ''}= link_to 'template', template_projects_path
+          %li{class: yield(:active) == 'template_projects' ? 'active' : ''}= link_to 'template project', template_projects_path
         %ul.nav.navbar-nav.navbar-right
           - if user_signed_in?
             %li= link_to current_user.email, '#'
