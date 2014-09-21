@@ -1,6 +1,7 @@
 class TemplateProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_template_project, only: [:edit, :update, :destroy, :show]
+  before_action :set_template_projects, only: [:export]
   respond_to :html
 
   def index
@@ -34,7 +35,16 @@ class TemplateProjectsController < ApplicationController
   def show
   end
 
+  def export
+    data = render_to_string template: 'template_projects/export.json.jbuilder', locals: { template_projects: @template_projects }
+    send_data data, type: 'application/json', filename: 'template.json'
+  end
+
   private
+
+  def set_template_projects
+    @template_projects = TemplateProject.all
+  end
 
   def set_template_project
     @template_project = TemplateProject.where(user: current_user, id: params[:id]).first

@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :task_projects
-  resources :template_projects
+  resources :template_projects do
+    collection do
+      get 'export'
+    end
+  end
 
   root 'task_projects#index'
   namespace :api do
