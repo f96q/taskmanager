@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :task_projects
   resources :template_projects do
     collection do
+      post 'import'
       get 'export'
     end
   end

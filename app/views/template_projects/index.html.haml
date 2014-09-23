@@ -6,6 +6,9 @@
 .mb10
   =link_to new_template_project_path, class: 'btn btn-primary' do
     %i.fa.fa-plus
+  %span.btn.btn-primary.btn-file
+    = form_tag import_template_projects_path, multipart: true, class: 'fa fa-upload', id: 'js-upload-form' do
+      = file_field_tag :file
   =link_to export_template_projects_path, class: 'btn btn-primary' do
     %i.fa.fa-download
 

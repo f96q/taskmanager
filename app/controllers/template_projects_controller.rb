@@ -35,6 +35,11 @@ class TemplateProjectsController < ApplicationController
   def show
   end
 
+  def import
+    TemplateProjectImporter.execute current_user, params[:file].read
+    redirect_to template_projects_path
+  end
+
   def export
     data = render_to_string template: 'template_projects/export.json.jbuilder', locals: { template_projects: @template_projects }
     send_data data, type: 'application/json', filename: 'template.json'
