@@ -43,4 +43,11 @@ RSpec.configure do |config|
 
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
+
+  config.before :suite do
+    DatabaseRewinder.clean_all
+  end
+  config.after :each do
+    DatabaseRewinder.clean_all
+  end
 end
