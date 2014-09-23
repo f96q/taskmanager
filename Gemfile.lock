@@ -40,6 +40,7 @@ GEM
       execjs
     coffee-script-source (1.7.1)
     commonjs (0.2.7)
+    database_rewinder (0.4.1)
     devise (3.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -241,6 +242,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list
   coffee-rails (~> 4.0.0)
+  database_rewinder
   devise
   factory_girl_rails
   font-awesome-rails
